@@ -1,101 +1,611 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fano | TKJ</title>
+
+    <title>Fano | Personal Website</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080b12;
             color: white;
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 11, 18, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #00e5ff;
+        }
+
+        /* HERO */
+        .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
+            padding: 100px 10% 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #0066ff;
+            filter: blur(180px);
+            opacity: 0.25;
+            right: -150px;
+            top: 100px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 1;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid #00e5ff;
+            border-radius: 30px;
+            color: #00e5ff;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 7vw, 85px);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #00e5ff;
+        }
+
+        .hero p {
+            color: #aeb6c7;
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #00e5ff;
+            color: #061018;
+        }
+
+        .secondary {
+            border: 1px solid #444;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,229,255,0.2);
+        }
+
+        /* SECTION */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
             text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+        }
+
+        .section-title p {
+            color: #8e98aa;
+        }
+
+        /* ABOUT */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
 
         .card {
-            width: 90%;
-            max-width: 700px;
-            padding: 50px 30px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            background: #10151f;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid #202938;
+            transition: 0.3s;
         }
 
-        h1 {
-            font-size: 55px;
-            margin-bottom: 10px;
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: #00e5ff;
         }
 
-        h2 {
-            font-weight: normal;
-            color: #93c5fd;
-            margin-bottom: 25px;
+        .card h3 {
+            color: #00e5ff;
+            margin-bottom: 15px;
         }
 
-        p {
-            line-height: 1.7;
-            color: #dbeafe;
+        .card p {
+            color: #aeb6c7;
         }
 
+        /* SKILLS */
         .skills {
-            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
         .skill {
-            display: inline-block;
-            padding: 10px 18px;
-            margin: 5px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.12);
+            background: #10151f;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #202938;
         }
 
+        .skill-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .skill h3 {
+            margin-bottom: 8px;
+        }
+
+        .skill p {
+            color: #8e98aa;
+        }
+
+        /* PROJECT */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .project {
+            background: linear-gradient(145deg, #121925, #0c1018);
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid #202938;
+            transition: 0.3s;
+        }
+
+        .project:hover {
+            transform: scale(1.03);
+        }
+
+        .project h3 {
+            color: #00e5ff;
+            margin-bottom: 10px;
+        }
+
+        .project p {
+            color: #9da7b9;
+        }
+
+        .project .tech {
+            margin-top: 20px;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        /* INFO */
+        .info {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            text-align: center;
+        }
+
+        .info-box {
+            background: #10151f;
+            padding: 25px 10px;
+            border-radius: 15px;
+            border: 1px solid #202938;
+        }
+
+        .info-box strong {
+            display: block;
+            font-size: 28px;
+            color: #00e5ff;
+        }
+
+        .info-box span {
+            color: #8e98aa;
+        }
+
+        /* CONTACT */
+        .contact {
+            text-align: center;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .contact p {
+            color: #9da7b9;
+            margin: 15px 0 30px;
+        }
+
+        /* FOOTER */
         footer {
-            margin-top: 35px;
-            font-size: 14px;
-            color: #bfdbfe;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #202938;
+            color: #70798a;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 80px 6%;
+            }
+
+            .hero {
+                padding: 100px 6% 50px;
+            }
+
+            .about,
+            .skills,
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .info {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="card">
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">F<span>.</span></div>
 
-        <h1>FANO</h1>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#skills">Skill</a></li>
+            <li><a href="#projects">Project</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+    </nav>
 
-        <h2>Student • TKJ • Networking</h2>
 
-        <p>
-            Halo! Saya Fano 👋<br>
-            Saya sedang belajar Teknik Komputer dan Jaringan,
-            Linux, Cisco, MikroTik, Docker, dan berbagai teknologi server.
-        </p>
+    <!-- HERO -->
+    <section class="hero" id="home">
 
-        <div class="skills">
-            <span class="skill">Cisco</span>
-            <span class="skill">MikroTik</span>
-            <span class="skill">Linux</span>
-            <span class="skill">Docker</span>
-            <span class="skill">Networking</span>
+        <div class="hero-content">
+
+            <div class="tag">
+                👋 Welcome to my website
+            </div>
+
+            <h1>
+                Halo, saya <span>Fano</span>
+            </h1>
+
+            <p>
+                Pelajar TKJ yang tertarik dengan dunia networking,
+                server, Linux, Docker, dan teknologi komputer.
+                Website ini adalah tempat untuk memperkenalkan
+                diri dan berbagai project yang sedang saya pelajari.
+            </p>
+
+            <div class="buttons">
+                <a href="#projects" class="btn primary">
+                    Lihat Project
+                </a>
+
+                <a href="#about" class="btn secondary">
+                    Tentang Saya
+                </a>
+            </div>
+
         </div>
 
-        <footer>
-            © 2026 Fano • My Personal Website
-        </footer>
+    </section>
 
-    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+
+        <div class="section-title">
+            <h2>Tentang Saya</h2>
+            <p>Kenalan lebih jauh dengan saya</p>
+        </div>
+
+        <div class="about">
+
+            <div class="card">
+                <h3>👨‍💻 Profil</h3>
+
+                <p>
+                    Nama saya Fano. Saya adalah pelajar jurusan
+                    Teknik Komputer dan Jaringan (TKJ).
+                    Saya senang mempelajari bagaimana komputer,
+                    server, dan jaringan dapat saling terhubung.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Tujuan</h3>
+
+                <p>
+                    Saya ingin terus meningkatkan kemampuan
+                    di bidang networking dan system administration
+                    serta membuat berbagai project teknologi
+                    untuk menambah pengalaman.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+    <section id="skills">
+
+        <div class="section-title">
+            <h2>My Skills</h2>
+            <p>Beberapa teknologi yang sedang saya pelajari</p>
+        </div>
+
+        <div class="skills">
+
+            <div class="skill">
+                <div class="skill-icon">🌐</div>
+                <h3>Networking</h3>
+                <p>
+                    IP Address, subnetting, VLAN, routing,
+                    switching dan konfigurasi jaringan.
+                </p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">🐧</div>
+                <h3>Linux</h3>
+                <p>
+                    Belajar Linux server, command line,
+                    konfigurasi jaringan dan service.
+                </p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">🐳</div>
+                <h3>Docker</h3>
+                <p>
+                    Membuat container, image, volume,
+                    bind mount dan web server menggunakan Nginx.
+                </p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">🔧</div>
+                <h3>Cisco</h3>
+                <p>
+                    Belajar Cisco Packet Tracer,
+                    static routing, VLAN, trunk dan STP.
+                </p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">⚡</div>
+                <h3>MikroTik</h3>
+                <p>
+                    Mempelajari konfigurasi router,
+                    DHCP, hotspot dan networking.
+                </p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">💻</div>
+                <h3>Web Development</h3>
+                <p>
+                    Membuat website menggunakan HTML,
+                    CSS dan JavaScript.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECT -->
+    <section id="projects">
+
+        <div class="section-title">
+            <h2>My Projects</h2>
+            <p>Project yang pernah atau sedang saya kerjakan</p>
+        </div>
+
+        <div class="projects">
+
+            <div class="project">
+                <h3>🌐 Website Personal</h3>
+
+                <p>
+                    Website personal sederhana menggunakan
+                    HTML dan CSS dengan desain modern.
+                </p>
+
+                <div class="tech">
+                    HTML • CSS
+                </div>
+            </div>
+
+            <div class="project">
+                <h3>🐳 Docker Web Server</h3>
+
+                <p>
+                    Menjalankan website menggunakan Docker
+                    dan Nginx serta memanfaatkan volume.
+                </p>
+
+                <div class="tech">
+                    Docker • Nginx • HTML
+                </div>
+            </div>
+
+            <div class="project">
+                <h3>🌐 Cisco Networking</h3>
+
+                <p>
+                    Simulasi jaringan menggunakan Cisco Packet
+                    Tracer dengan VLAN dan routing.
+                </p>
+
+                <div class="tech">
+                    Cisco • VLAN • Routing
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- INFORMATION -->
+    <section>
+
+        <div class="section-title">
+            <h2>Quick Information</h2>
+        </div>
+
+        <div class="info">
+
+            <div class="info-box">
+                <strong>TKJ</strong>
+                <span>Jurusan</span>
+            </div>
+
+            <div class="info-box">
+                <strong>11</strong>
+                <span>Kelas</span>
+            </div>
+
+            <div class="info-box">
+                <strong>🌐</strong>
+                <span>Networking</span>
+            </div>
+
+            <div class="info-box">
+                <strong>💻</strong>
+                <span>Technology</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact">
+
+        <div class="contact">
+
+            <div class="section-title">
+                <h2>Let's Connect</h2>
+            </div>
+
+            <p>
+                Terima kasih sudah mengunjungi website saya.
+                Website ini akan terus saya kembangkan
+                seiring bertambahnya pengalaman dan project.
+            </p>
+
+            <a href="mailto:emailkamu@gmail.com"
+               class="btn primary">
+                ✉️ Hubungi Saya
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 Fano. Built with HTML & CSS.
+    </footer>
+
 
 </body>
 </html>
+```
+
