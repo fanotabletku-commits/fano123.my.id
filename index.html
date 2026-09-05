@@ -1,329 +1,476 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Fano | Personal Website</title>
+    <title>FANO | Dragon of Thunder</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #080b12;
+            background:
+                radial-gradient(circle at 50% 20%, #ffcc33 0%, #ff7b00 25%, #d83b00 60%, #1b0500 100%);
             color: white;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* NAVBAR */
-        nav {
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .background {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 18px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(8, 11, 18, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .logo span {
-            color: #00e5ff;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav a {
-            color: #ddd;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #00e5ff;
-        }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 100px 10% 50px;
-            position: relative;
+            inset: 0;
+            z-index: -10;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: "";
+        .sun {
             position: absolute;
             width: 500px;
             height: 500px;
-            background: #0066ff;
-            filter: blur(180px);
-            opacity: 0.25;
-            right: -150px;
-            top: 100px;
+            background: #ffea00;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .25;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .fire {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: #ff4500;
+            filter: blur(150px);
+            opacity: .25;
+            bottom: -400px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* =========================
+           PETIR
+        ========================= */
+
+        .lightning {
+            position: absolute;
+            width: 8px;
+            height: 180px;
+            background: white;
+            box-shadow:
+                0 0 10px white,
+                0 0 30px #00eaff,
+                0 0 70px #00eaff;
+            clip-path: polygon(
+                50% 0,
+                100% 0,
+                62% 42%,
+                90% 42%,
+                25% 100%,
+                43% 55%,
+                10% 55%
+            );
+            opacity: 0;
+            animation: lightning 5s infinite;
+        }
+
+        .l1 {
+            left: 12%;
+            top: 5%;
+            animation-delay: 1s;
+        }
+
+        .l2 {
+            right: 15%;
+            top: 20%;
+            animation-delay: 3s;
+        }
+
+        .l3 {
+            left: 45%;
+            top: 0;
+            animation-delay: 4s;
+        }
+
+        @keyframes lightning {
+            0%, 85%, 100% {
+                opacity: 0;
+            }
+
+            86% {
+                opacity: 1;
+            }
+
+            87% {
+                opacity: .1;
+            }
+
+            88% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            padding: 15px 25px;
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 50px;
+            background: rgba(40, 10, 0, .45);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(255,180,0,.25);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            color: #ffd000;
+            text-shadow: 0 0 15px #ffae00;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #ffd000;
+            text-shadow: 0 0 15px #ffd000;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 120px 20px 50px;
         }
 
         .hero-content {
-            max-width: 700px;
-            z-index: 1;
+            max-width: 900px;
         }
 
-        .tag {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 1px solid #00e5ff;
-            border-radius: 30px;
-            color: #00e5ff;
-            margin-bottom: 20px;
+        .dragon {
+            font-size: 130px;
+            filter:
+                drop-shadow(0 0 10px #ffdf00)
+                drop-shadow(0 0 30px #ff5e00)
+                drop-shadow(0 0 60px #ff2600);
+            animation: dragonFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes dragonFloat {
+            0%,100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(2deg);
+            }
         }
 
         .hero h1 {
-            font-size: clamp(45px, 7vw, 85px);
-            line-height: 1;
-            margin-bottom: 20px;
+            font-size: clamp(65px, 13vw, 150px);
+            font-weight: 1000;
+            letter-spacing: -8px;
+            color: #fff;
+            text-shadow:
+                0 0 10px #fff,
+                0 0 30px #ffdd00,
+                0 0 60px #ff6a00,
+                8px 8px 0 #8c1d00;
         }
 
-        .hero h1 span {
-            color: #00e5ff;
+        .hero h2 {
+            font-size: clamp(20px, 4vw, 35px);
+            color: #ffd000;
+            margin-top: 10px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
         }
 
         .hero p {
-            color: #aeb6c7;
+            margin: 25px auto;
+            max-width: 650px;
+            line-height: 1.7;
             font-size: 18px;
-            max-width: 600px;
-            margin-bottom: 30px;
+            color: #ffe9c4;
         }
 
-        .buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 13px 24px;
-            border-radius: 10px;
+        .button {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #ffd000, #ff7b00);
+            color: #351000;
             text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            font-weight: 900;
+            box-shadow:
+                0 0 20px #ffb300,
+                0 0 50px rgba(255,100,0,.5);
+            transition: .3s;
         }
 
-        .primary {
-            background: #00e5ff;
-            color: #061018;
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow:
+                0 0 30px #fff000,
+                0 0 80px #ff6500;
         }
 
-        .secondary {
-            border: 1px solid #444;
-            color: white;
-        }
+        /* =========================
+           COINS
+        ========================= */
 
-        .btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,229,255,0.2);
-        }
-
-        /* SECTION */
-        section {
-            padding: 100px 10%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 40px;
-        }
-
-        .section-title p {
-            color: #8e98aa;
-        }
-
-        /* ABOUT */
-        .about {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .card {
-            background: #10151f;
-            padding: 30px;
-            border-radius: 18px;
-            border: 1px solid #202938;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-7px);
-            border-color: #00e5ff;
-        }
-
-        .card h3 {
-            color: #00e5ff;
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            color: #aeb6c7;
-        }
-
-        /* SKILLS */
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .skill {
-            background: #10151f;
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid #202938;
-        }
-
-        .skill-icon {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
-
-        .skill h3 {
-            margin-bottom: 8px;
-        }
-
-        .skill p {
-            color: #8e98aa;
-        }
-
-        /* PROJECT */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .project {
-            background: linear-gradient(145deg, #121925, #0c1018);
-            padding: 25px;
-            border-radius: 18px;
-            border: 1px solid #202938;
-            transition: 0.3s;
-        }
-
-        .project:hover {
-            transform: scale(1.03);
-        }
-
-        .project h3 {
-            color: #00e5ff;
-            margin-bottom: 10px;
-        }
-
-        .project p {
-            color: #9da7b9;
-        }
-
-        .project .tech {
-            margin-top: 20px;
-            color: #fff;
-            font-size: 13px;
-        }
-
-        /* INFO */
-        .info {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            text-align: center;
-        }
-
-        .info-box {
-            background: #10151f;
-            padding: 25px 10px;
-            border-radius: 15px;
-            border: 1px solid #202938;
-        }
-
-        .info-box strong {
-            display: block;
+        .coin {
+            position: fixed;
+            top: -50px;
+            z-index: 5;
             font-size: 28px;
-            color: #00e5ff;
+            animation: coinFall linear infinite;
+            filter: drop-shadow(0 0 8px #ffd000);
+            pointer-events: none;
         }
 
-        .info-box span {
-            color: #8e98aa;
-        }
-
-        /* CONTACT */
-        .contact {
-            text-align: center;
-            max-width: 700px;
-            margin: auto;
-        }
-
-        .contact p {
-            color: #9da7b9;
-            margin: 15px 0 30px;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid #202938;
-            color: #70798a;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 800px) {
-
-            nav {
-                padding: 15px 5%;
+        @keyframes coinFall {
+            0% {
+                transform: translateY(-50px) rotateY(0deg) rotateZ(0deg);
             }
 
-            nav ul {
+            100% {
+                transform: translateY(110vh) rotateY(720deg) rotateZ(360deg);
+            }
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        section {
+            min-height: 100vh;
+            padding: 120px 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 55px;
+            color: #ffd000;
+            margin-bottom: 60px;
+            text-shadow: 0 0 25px #ff6a00;
+        }
+
+        /* =========================
+           PROFILE CARD
+        ========================= */
+
+        .profile {
+            max-width: 1000px;
+            margin: auto;
+            padding: 50px;
+            border-radius: 30px;
+            background: rgba(30, 5, 0, .55);
+            border: 1px solid rgba(255,200,0,.4);
+            backdrop-filter: blur(20px);
+            box-shadow:
+                0 0 40px rgba(255,120,0,.3),
+                inset 0 0 40px rgba(255,180,0,.05);
+            transform: perspective(1000px) rotateX(2deg);
+        }
+
+        .profile h3 {
+            font-size: 35px;
+            color: #ffd000;
+            margin-bottom: 20px;
+        }
+
+        .profile p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #ffe9d0;
+        }
+
+        .highlight {
+            color: #ffd000;
+            font-weight: bold;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+            width: 100%;
+        }
+
+        .stat {
+            padding: 35px;
+            text-align: center;
+            border-radius: 25px;
+            background: rgba(40,10,0,.6);
+            border: 1px solid rgba(255,210,0,.3);
+            transition: .4s;
+        }
+
+        .stat:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 0 40px rgba(255,190,0,.4);
+        }
+
+        .stat span {
+            font-size: 50px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat h4 {
+            color: #ffd000;
+            font-size: 22px;
+        }
+
+        /* =========================
+           POWER
+        ========================= */
+
+        .power {
+            text-align: center;
+        }
+
+        .power-box {
+            max-width: 900px;
+            margin: auto;
+            padding: 60px 30px;
+            border-radius: 35px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,180,0,.2),
+                    rgba(100,0,0,.5)
+                );
+            border: 2px solid rgba(255,200,0,.4);
+            box-shadow: 0 0 70px rgba(255,100,0,.3);
+        }
+
+        .power-icon {
+            font-size: 100px;
+            animation: power 1.5s infinite alternate;
+        }
+
+        @keyframes power {
+            from {
+                filter: drop-shadow(0 0 10px #00eaff);
+            }
+
+            to {
+                filter:
+                    drop-shadow(0 0 30px #00eaff)
+                    drop-shadow(0 0 70px #ffffff);
+            }
+        }
+
+        .power-box h3 {
+            font-size: 40px;
+            color: #fff;
+            margin: 20px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(20,3,0,.8);
+            border-top: 1px solid rgba(255,190,0,.3);
+        }
+
+        footer h2 {
+            color: #ffd000;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #cfae8d;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:700px) {
+
+            nav {
+                padding: 12px 18px;
+            }
+
+            nav div:last-child {
                 display: none;
             }
 
-            section {
-                padding: 80px 6%;
+            .dragon {
+                font-size: 90px;
             }
 
-            .hero {
-                padding: 100px 6% 50px;
+            .hero h1 {
+                letter-spacing: -4px;
             }
 
-            .about,
-            .skills,
-            .projects {
+            .stats {
                 grid-template-columns: 1fr;
             }
 
-            .info {
-                grid-template-columns: repeat(2, 1fr);
+            .profile {
+                padding: 30px;
+            }
+
+            .title {
+                font-size: 40px;
             }
         }
     </style>
@@ -331,281 +478,171 @@
 
 <body>
 
+    <!-- BACKGROUND -->
+    <div class="background">
+        <div class="sun"></div>
+        <div class="fire"></div>
+
+        <div class="lightning l1"></div>
+        <div class="lightning l2"></div>
+        <div class="lightning l3"></div>
+    </div>
+
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">F<span>.</span></div>
+        <div class="logo">⚡ FANO</div>
 
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">Tentang</a></li>
-            <li><a href="#skills">Skill</a></li>
-            <li><a href="#projects">Project</a></li>
-            <li><a href="#contact">Kontak</a></li>
-        </ul>
+        <div>
+            <a href="#home">HOME</a>
+            <a href="#bio">BIO</a>
+            <a href="#power">POWER</a>
+        </div>
     </nav>
 
+    <!-- COINS -->
+    <div class="coin" style="left:5%; animation-duration:7s;">🪙</div>
+    <div class="coin" style="left:15%; animation-duration:5s; animation-delay:2s;">🪙</div>
+    <div class="coin" style="left:28%; animation-duration:8s; animation-delay:1s;">🪙</div>
+    <div class="coin" style="left:45%; animation-duration:6s; animation-delay:3s;">🪙</div>
+    <div class="coin" style="left:62%; animation-duration:9s;">🪙</div>
+    <div class="coin" style="left:78%; animation-duration:5s; animation-delay:2s;">🪙</div>
+    <div class="coin" style="left:90%; animation-duration:7s; animation-delay:1s;">🪙</div>
 
     <!-- HERO -->
     <section class="hero" id="home">
 
         <div class="hero-content">
 
-            <div class="tag">
-                👋 Welcome to my website
-            </div>
+            <div class="dragon">🐉</div>
 
-            <h1>
-                Halo, saya <span>Fano</span>
-            </h1>
+            <h1>FANO</h1>
+
+            <h2>Dragon of Thunder</h2>
 
             <p>
-                Pelajar TKJ yang tertarik dengan dunia networking,
-                server, Linux, Docker, dan teknologi komputer.
-                Website ini adalah tempat untuk memperkenalkan
-                diri dan berbagai project yang sedang saya pelajari.
+                Di antara petir yang membelah langit dan kobaran api yang
+                membakar cakrawala, lahirlah seorang manusia bernama
+                <span class="highlight">Fano</span>.
+                Bukan raja. Bukan dewa.
+                Tapi seseorang yang sedang membangun legendanya sendiri.
             </p>
 
-            <div class="buttons">
-                <a href="#projects" class="btn primary">
-                    Lihat Project
-                </a>
-
-                <a href="#about" class="btn secondary">
-                    Tentang Saya
-                </a>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ABOUT -->
-    <section id="about">
-
-        <div class="section-title">
-            <h2>Tentang Saya</h2>
-            <p>Kenalan lebih jauh dengan saya</p>
-        </div>
-
-        <div class="about">
-
-            <div class="card">
-                <h3>👨‍💻 Profil</h3>
-
-                <p>
-                    Nama saya Fano. Saya adalah pelajar jurusan
-                    Teknik Komputer dan Jaringan (TKJ).
-                    Saya senang mempelajari bagaimana komputer,
-                    server, dan jaringan dapat saling terhubung.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>🎯 Tujuan</h3>
-
-                <p>
-                    Saya ingin terus meningkatkan kemampuan
-                    di bidang networking dan system administration
-                    serta membuat berbagai project teknologi
-                    untuk menambah pengalaman.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- SKILLS -->
-    <section id="skills">
-
-        <div class="section-title">
-            <h2>My Skills</h2>
-            <p>Beberapa teknologi yang sedang saya pelajari</p>
-        </div>
-
-        <div class="skills">
-
-            <div class="skill">
-                <div class="skill-icon">🌐</div>
-                <h3>Networking</h3>
-                <p>
-                    IP Address, subnetting, VLAN, routing,
-                    switching dan konfigurasi jaringan.
-                </p>
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">🐧</div>
-                <h3>Linux</h3>
-                <p>
-                    Belajar Linux server, command line,
-                    konfigurasi jaringan dan service.
-                </p>
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">🐳</div>
-                <h3>Docker</h3>
-                <p>
-                    Membuat container, image, volume,
-                    bind mount dan web server menggunakan Nginx.
-                </p>
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">🔧</div>
-                <h3>Cisco</h3>
-                <p>
-                    Belajar Cisco Packet Tracer,
-                    static routing, VLAN, trunk dan STP.
-                </p>
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">⚡</div>
-                <h3>MikroTik</h3>
-                <p>
-                    Mempelajari konfigurasi router,
-                    DHCP, hotspot dan networking.
-                </p>
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">💻</div>
-                <h3>Web Development</h3>
-                <p>
-                    Membuat website menggunakan HTML,
-                    CSS dan JavaScript.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- PROJECT -->
-    <section id="projects">
-
-        <div class="section-title">
-            <h2>My Projects</h2>
-            <p>Project yang pernah atau sedang saya kerjakan</p>
-        </div>
-
-        <div class="projects">
-
-            <div class="project">
-                <h3>🌐 Website Personal</h3>
-
-                <p>
-                    Website personal sederhana menggunakan
-                    HTML dan CSS dengan desain modern.
-                </p>
-
-                <div class="tech">
-                    HTML • CSS
-                </div>
-            </div>
-
-            <div class="project">
-                <h3>🐳 Docker Web Server</h3>
-
-                <p>
-                    Menjalankan website menggunakan Docker
-                    dan Nginx serta memanfaatkan volume.
-                </p>
-
-                <div class="tech">
-                    Docker • Nginx • HTML
-                </div>
-            </div>
-
-            <div class="project">
-                <h3>🌐 Cisco Networking</h3>
-
-                <p>
-                    Simulasi jaringan menggunakan Cisco Packet
-                    Tracer dengan VLAN dan routing.
-                </p>
-
-                <div class="tech">
-                    Cisco • VLAN • Routing
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- INFORMATION -->
-    <section>
-
-        <div class="section-title">
-            <h2>Quick Information</h2>
-        </div>
-
-        <div class="info">
-
-            <div class="info-box">
-                <strong>TKJ</strong>
-                <span>Jurusan</span>
-            </div>
-
-            <div class="info-box">
-                <strong>11</strong>
-                <span>Kelas</span>
-            </div>
-
-            <div class="info-box">
-                <strong>🌐</strong>
-                <span>Networking</span>
-            </div>
-
-            <div class="info-box">
-                <strong>💻</strong>
-                <span>Technology</span>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CONTACT -->
-    <section id="contact">
-
-        <div class="contact">
-
-            <div class="section-title">
-                <h2>Let's Connect</h2>
-            </div>
-
-            <p>
-                Terima kasih sudah mengunjungi website saya.
-                Website ini akan terus saya kembangkan
-                seiring bertambahnya pengalaman dan project.
-            </p>
-
-            <a href="mailto:emailkamu@gmail.com"
-               class="btn primary">
-                ✉️ Hubungi Saya
+            <a href="#bio" class="button">
+                ⚡ BUKA LEGENDA ⚡
             </a>
 
         </div>
 
     </section>
 
+    <!-- BIO -->
+    <section id="bio">
+
+        <h2 class="title">📜 BIOGRAFI</h2>
+
+        <div class="profile">
+
+            <h3>🔥 Fano — The Rising Dragon</h3>
+
+            <p>
+                <span class="highlight">Fano</span> adalah seorang pelajar
+                yang sedang menempuh pendidikan di kelas
+                <span class="highlight">11 TKJ 4</span>.
+                Ia memiliki ketertarikan terhadap dunia teknologi,
+                komputer, jaringan, dan berbagai hal yang berhubungan
+                dengan dunia digital.
+            </p>
+
+            <br>
+
+            <p>
+                Di luar dunia teknologi, Fano juga memiliki hobi
+                <span class="highlight">berlari</span>.
+                Baginya, setiap langkah bukan hanya tentang mencapai
+                garis akhir, tetapi tentang menjadi lebih kuat daripada
+                dirinya yang kemarin.
+            </p>
+
+            <br>
+
+            <p>
+                Jika dunia adalah sebuah arena,
+                maka Fano tidak ingin hanya menjadi penonton.
+                Ia ingin masuk ke dalam arena,
+                menghadapi tantangan,
+                dan menciptakan jalannya sendiri.
+            </p>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <span>💻</span>
+                <h4>TKJ</h4>
+                <p>Computer & Network</p>
+            </div>
+
+            <div class="stat">
+                <span>🏃</span>
+                <h4>RUNNER</h4>
+                <p>Never Stop Moving</p>
+            </div>
+
+            <div class="stat">
+                <span>🐉</span>
+                <h4>DRAGON</h4>
+                <p>Power Within</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- POWER -->
+    <section id="power" class="power">
+
+        <h2 class="title">⚡ THE POWER</h2>
+
+        <div class="power-box">
+
+            <div class="power-icon">⚡</div>
+
+            <h3>THUNDER SOUL</h3>
+
+            <p>
+                Petir tidak selalu datang untuk menghancurkan.
+                Terkadang ia datang untuk menerangi jalan.
+            </p>
+
+            <br>
+
+            <p>
+                Fano adalah perjalanan yang belum selesai.
+                Setiap tantangan adalah satu chapter,
+                setiap kegagalan adalah XP,
+                dan setiap keberhasilan adalah koin emas
+                yang dikumpulkan menuju level berikutnya.
+            </p>
+
+        </div>
+
+    </section>
 
     <!-- FOOTER -->
     <footer>
-        © 2026 Fano. Built with HTML & CSS.
-    </footer>
 
+        <h2>🐉 FANO — DRAGON OF THUNDER ⚡</h2>
+
+        <p>
+            "Legenda tidak ditemukan. Legenda dibuat."
+        </p>
+
+        <br>
+
+        <p>© 2026 Fano. All Rights Reserved.</p>
+
+    </footer>
 
 </body>
 </html>
-```
-
