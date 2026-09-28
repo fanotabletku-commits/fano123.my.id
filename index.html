@@ -1,648 +1,767 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FANO | Dragon of Thunder</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 50% 20%, #ffcc33 0%, #ff7b00 25%, #d83b00 60%, #1b0500 100%);
-            color: white;
-            overflow-x: hidden;
-        }
-
-        /* =========================
-           BACKGROUND
-        ========================= */
-
-        .background {
-            position: fixed;
-            inset: 0;
-            z-index: -10;
-            overflow: hidden;
-        }
-
-        .sun {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: #ffea00;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: .25;
-            top: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .fire {
-            position: absolute;
-            width: 700px;
-            height: 700px;
-            border-radius: 50%;
-            background: #ff4500;
-            filter: blur(150px);
-            opacity: .25;
-            bottom: -400px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* =========================
-           PETIR
-        ========================= */
-
-        .lightning {
-            position: absolute;
-            width: 8px;
-            height: 180px;
-            background: white;
-            box-shadow:
-                0 0 10px white,
-                0 0 30px #00eaff,
-                0 0 70px #00eaff;
-            clip-path: polygon(
-                50% 0,
-                100% 0,
-                62% 42%,
-                90% 42%,
-                25% 100%,
-                43% 55%,
-                10% 55%
-            );
-            opacity: 0;
-            animation: lightning 5s infinite;
-        }
-
-        .l1 {
-            left: 12%;
-            top: 5%;
-            animation-delay: 1s;
-        }
-
-        .l2 {
-            right: 15%;
-            top: 20%;
-            animation-delay: 3s;
-        }
-
-        .l3 {
-            left: 45%;
-            top: 0;
-            animation-delay: 4s;
-        }
-
-        @keyframes lightning {
-            0%, 85%, 100% {
-                opacity: 0;
-            }
-
-            86% {
-                opacity: 1;
-            }
-
-            87% {
-                opacity: .1;
-            }
-
-            88% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 0;
-            }
-        }
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1000px;
-            padding: 15px 25px;
-            border: 1px solid rgba(255,255,255,.3);
-            border-radius: 50px;
-            background: rgba(40, 10, 0, .45);
-            backdrop-filter: blur(15px);
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 0 30px rgba(255,180,0,.25);
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 900;
-            color: #ffd000;
-            text-shadow: 0 0 15px #ffae00;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: bold;
-            transition: .3s;
-        }
-
-        nav a:hover {
-            color: #ffd000;
-            text-shadow: 0 0 15px #ffd000;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 120px 20px 50px;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .dragon {
-            font-size: 130px;
-            filter:
-                drop-shadow(0 0 10px #ffdf00)
-                drop-shadow(0 0 30px #ff5e00)
-                drop-shadow(0 0 60px #ff2600);
-            animation: dragonFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes dragonFloat {
-            0%,100% {
-                transform: translateY(0) rotate(-2deg);
-            }
-
-            50% {
-                transform: translateY(-25px) rotate(2deg);
-            }
-        }
-
-        .hero h1 {
-            font-size: clamp(65px, 13vw, 150px);
-            font-weight: 1000;
-            letter-spacing: -8px;
-            color: #fff;
-            text-shadow:
-                0 0 10px #fff,
-                0 0 30px #ffdd00,
-                0 0 60px #ff6a00,
-                8px 8px 0 #8c1d00;
-        }
-
-        .hero h2 {
-            font-size: clamp(20px, 4vw, 35px);
-            color: #ffd000;
-            margin-top: 10px;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-        }
-
-        .hero p {
-            margin: 25px auto;
-            max-width: 650px;
-            line-height: 1.7;
-            font-size: 18px;
-            color: #ffe9c4;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 15px 35px;
-            border-radius: 50px;
-            background: linear-gradient(90deg, #ffd000, #ff7b00);
-            color: #351000;
-            text-decoration: none;
-            font-weight: 900;
-            box-shadow:
-                0 0 20px #ffb300,
-                0 0 50px rgba(255,100,0,.5);
-            transition: .3s;
-        }
-
-        .button:hover {
-            transform: scale(1.1);
-            box-shadow:
-                0 0 30px #fff000,
-                0 0 80px #ff6500;
-        }
-
-        /* =========================
-           COINS
-        ========================= */
-
-        .coin {
-            position: fixed;
-            top: -50px;
-            z-index: 5;
-            font-size: 28px;
-            animation: coinFall linear infinite;
-            filter: drop-shadow(0 0 8px #ffd000);
-            pointer-events: none;
-        }
-
-        @keyframes coinFall {
-            0% {
-                transform: translateY(-50px) rotateY(0deg) rotateZ(0deg);
-            }
-
-            100% {
-                transform: translateY(110vh) rotateY(720deg) rotateZ(360deg);
-            }
-        }
-
-        /* =========================
-           SECTION
-        ========================= */
-
-        section {
-            min-height: 100vh;
-            padding: 120px 8%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .title {
-            text-align: center;
-            font-size: 55px;
-            color: #ffd000;
-            margin-bottom: 60px;
-            text-shadow: 0 0 25px #ff6a00;
-        }
-
-        /* =========================
-           PROFILE CARD
-        ========================= */
-
-        .profile {
-            max-width: 1000px;
-            margin: auto;
-            padding: 50px;
-            border-radius: 30px;
-            background: rgba(30, 5, 0, .55);
-            border: 1px solid rgba(255,200,0,.4);
-            backdrop-filter: blur(20px);
-            box-shadow:
-                0 0 40px rgba(255,120,0,.3),
-                inset 0 0 40px rgba(255,180,0,.05);
-            transform: perspective(1000px) rotateX(2deg);
-        }
-
-        .profile h3 {
-            font-size: 35px;
-            color: #ffd000;
-            margin-bottom: 20px;
-        }
-
-        .profile p {
-            font-size: 18px;
-            line-height: 1.9;
-            color: #ffe9d0;
-        }
-
-        .highlight {
-            color: #ffd000;
-            font-weight: bold;
-        }
-
-        /* =========================
-           STATS
-        ========================= */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            max-width: 1000px;
-            margin: 40px auto 0;
-            width: 100%;
-        }
-
-        .stat {
-            padding: 35px;
-            text-align: center;
-            border-radius: 25px;
-            background: rgba(40,10,0,.6);
-            border: 1px solid rgba(255,210,0,.3);
-            transition: .4s;
-        }
-
-        .stat:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 0 40px rgba(255,190,0,.4);
-        }
-
-        .stat span {
-            font-size: 50px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .stat h4 {
-            color: #ffd000;
-            font-size: 22px;
-        }
-
-        /* =========================
-           POWER
-        ========================= */
-
-        .power {
-            text-align: center;
-        }
-
-        .power-box {
-            max-width: 900px;
-            margin: auto;
-            padding: 60px 30px;
-            border-radius: 35px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(255,180,0,.2),
-                    rgba(100,0,0,.5)
-                );
-            border: 2px solid rgba(255,200,0,.4);
-            box-shadow: 0 0 70px rgba(255,100,0,.3);
-        }
-
-        .power-icon {
-            font-size: 100px;
-            animation: power 1.5s infinite alternate;
-        }
-
-        @keyframes power {
-            from {
-                filter: drop-shadow(0 0 10px #00eaff);
-            }
-
-            to {
-                filter:
-                    drop-shadow(0 0 30px #00eaff)
-                    drop-shadow(0 0 70px #ffffff);
-            }
-        }
-
-        .power-box h3 {
-            font-size: 40px;
-            color: #fff;
-            margin: 20px;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            background: rgba(20,3,0,.8);
-            border-top: 1px solid rgba(255,190,0,.3);
-        }
-
-        footer h2 {
-            color: #ffd000;
-            margin-bottom: 10px;
-        }
-
-        footer p {
-            color: #cfae8d;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media(max-width:700px) {
-
-            nav {
-                padding: 12px 18px;
-            }
-
-            nav div:last-child {
-                display: none;
-            }
-
-            .dragon {
-                font-size: 90px;
-            }
-
-            .hero h1 {
-                letter-spacing: -4px;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .profile {
-                padding: 30px;
-            }
-
-            .title {
-                font-size: 40px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FANO | Dragon of Thunder</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 50% 15%, #ffcf33 0%, #ff6a00 18%, #a51c00 42%, #180000 78%, #050000 100%);
+}
+
+/* ===== BACKGROUND ===== */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.15), transparent 15%),
+        radial-gradient(circle at 80% 25%, rgba(255,190,0,.15), transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(255,50,0,.20), transparent 30%);
+    pointer-events: none;
+    z-index: -5;
+}
+
+/* ===== PETIR ===== */
+
+.lightning {
+    position: fixed;
+    width: 4px;
+    height: 220px;
+    background: #fff;
+    box-shadow:
+        0 0 10px #fff,
+        0 0 25px #00b7ff,
+        0 0 50px #008cff;
+    opacity: 0;
+    z-index: -1;
+    animation: flash 4s infinite;
+}
+
+.l1 {
+    top: 5%;
+    left: 15%;
+    transform: rotate(25deg);
+}
+
+.l2 {
+    top: 25%;
+    right: 13%;
+    transform: rotate(-30deg);
+    animation-delay: 1.5s;
+}
+
+.l3 {
+    bottom: 8%;
+    left: 45%;
+    transform: rotate(15deg);
+    animation-delay: 3s;
+}
+
+@keyframes flash {
+    0%, 88%, 100% {
+        opacity: 0;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    92% {
+        opacity: .15;
+    }
+
+    94% {
+        opacity: 1;
+    }
+
+    96% {
+        opacity: 0;
+    }
+}
+
+/* ===== NAVBAR ===== */
+
+nav {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 900px);
+    padding: 15px 24px;
+    border-radius: 50px;
+    background: rgba(15, 3, 0, .72);
+    border: 1px solid rgba(255,190,0,.5);
+    backdrop-filter: blur(14px);
+    box-shadow:
+        0 0 20px rgba(255,100,0,.3),
+        inset 0 0 20px rgba(255,180,0,.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 900;
+    color: #ffd000;
+    text-shadow:
+        0 0 10px #ff8c00,
+        0 0 25px #ff3c00;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 20px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #ffd000;
+    text-shadow:
+        0 0 10px #ff7b00,
+        0 0 20px #ff3c00;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+    min-height: 100vh;
+    padding: 130px 20px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* ===== FOTO FANO ===== */
+
+.dragon-photo {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #ffd000;
+
+    box-shadow:
+        0 0 12px #fff,
+        0 0 30px #ffd000,
+        0 0 60px #ff7200,
+        0 0 110px #ff2600;
+
+    animation: dragonFloat 3s ease-in-out infinite;
+    margin-bottom: 25px;
+}
+
+@keyframes dragonFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-15px) scale(1.04);
+    }
+}
+
+/* ===== TITLE ===== */
+
+.hero h1 {
+    font-size: clamp(65px, 14vw, 155px);
+    font-weight: 1000;
+    letter-spacing: 10px;
+    color: #fff;
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 25px #ffd000,
+        0 0 50px #ff6500,
+        0 0 100px #ff2600;
+}
+
+.subtitle {
+    margin-top: 8px;
+    font-size: clamp(20px, 4vw, 38px);
+    font-weight: bold;
+    color: #ffd000;
+
+    text-shadow:
+        0 0 10px #ff9d00,
+        0 0 25px #ff4500;
+}
+
+.description {
+    max-width: 700px;
+    margin-top: 20px;
+    line-height: 1.8;
+    color: #ffe9c0;
+    font-size: 17px;
+}
+
+/* ===== BUTTON ===== */
+
+.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 32px;
+    border-radius: 50px;
+
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #ff2600,
+        #ff7200,
+        #ffc400
+    );
+
+    box-shadow:
+        0 0 15px #ff6500,
+        0 0 40px rgba(255,80,0,.6);
+
+    transition: .3s;
+}
+
+.button:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 20px #fff,
+        0 0 50px #ff6500,
+        0 0 90px #ff2600;
+}
+
+/* ===== SECTION ===== */
+
+section {
+    width: min(1000px, 90%);
+    margin: auto;
+    padding: 100px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 45px;
+    color: #ffd000;
+
+    text-shadow:
+        0 0 15px #ff6500,
+        0 0 35px #ff2600;
+
+    margin-bottom: 40px;
+}
+
+/* ===== BIO ===== */
+
+.bio-box {
+    padding: 35px;
+    border-radius: 25px;
+
+    background: rgba(20, 5, 0, .68);
+
+    border: 1px solid rgba(255,190,0,.4);
+
+    box-shadow:
+        0 0 35px rgba(255,80,0,.25),
+        inset 0 0 25px rgba(255,120,0,.05);
+
+    backdrop-filter: blur(10px);
+
+    line-height: 1.9;
+}
+
+.bio-box strong {
+    color: #ffd000;
+}
+
+/* ===== STATS ===== */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card {
+    padding: 30px 20px;
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: rgba(20,5,0,.72);
+
+    border: 1px solid rgba(255,190,0,.4);
+
+    box-shadow:
+        0 0 25px rgba(255,90,0,.2);
+
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 0 20px #ffd000,
+        0 0 50px rgba(255,80,0,.5);
+}
+
+.card .icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #ffd000;
+    margin-bottom: 8px;
+}
+
+/* ===== QUOTE ===== */
+
+.quote {
+    width: min(750px, 90%);
+    margin: 40px auto 80px;
+
+    text-align: center;
+
+    font-size: 24px;
+    font-style: italic;
+
+    color: #ffe8a0;
+
+    text-shadow:
+        0 0 10px #ff6500;
+}
+
+.quote span {
+    display: block;
+    margin-top: 15px;
+
+    font-size: 15px;
+    font-style: normal;
+
+    color: #ffd000;
+}
+
+/* ===== POWER ===== */
+
+.power-box {
+    padding: 50px 25px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,150,255,.25),
+            rgba(10,0,0,.85)
+        );
+
+    border: 2px solid rgba(0,170,255,.6);
+
+    box-shadow:
+        0 0 20px #008cff,
+        0 0 60px rgba(0,120,255,.25),
+        inset 0 0 40px rgba(0,130,255,.15);
+}
+
+.power-icon {
+    font-size: 80px;
+
+    animation: thunder 1.5s infinite;
+}
+
+@keyframes thunder {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px #fff);
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 20px #00aaff)
+            drop-shadow(0 0 50px #008cff);
+    }
+}
+
+.power-box h2 {
+    margin: 15px 0;
+
+    font-size: 35px;
+
+    color: #5fcaff;
+
+    text-shadow:
+        0 0 15px #008cff,
+        0 0 35px #005eff;
+}
+
+.power-box p {
+    color: #d8f4ff;
+    line-height: 1.8;
+}
+
+/* ===== COINS ===== */
+
+.coin {
+    position: fixed;
+    top: -60px;
+
+    font-size: 25px;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    animation: fall linear infinite;
+}
+
+.c1 {
+    left: 8%;
+    animation-duration: 7s;
+}
+
+.c2 {
+    left: 25%;
+    animation-duration: 10s;
+    animation-delay: 2s;
+}
+
+.c3 {
+    left: 50%;
+    animation-duration: 8s;
+    animation-delay: 1s;
+}
+
+.c4 {
+    left: 72%;
+    animation-duration: 11s;
+    animation-delay: 3s;
+}
+
+.c5 {
+    left: 90%;
+    animation-duration: 9s;
+    animation-delay: 4s;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-60px) rotate(0deg);
+    }
+
+    to {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: #ffc46b;
+
+    border-top:
+        1px solid rgba(255,180,0,.25);
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 700px) {
+
+    nav {
+        padding: 12px 15px;
+    }
+
+    nav a {
+        margin-left: 7px;
+        font-size: 11px;
+    }
+
+    .dragon-photo {
+        width: 180px;
+        height: 180px;
+    }
+
+    .hero h1 {
+        letter-spacing: 5px;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 35px;
+    }
+
+    .quote {
+        font-size: 20px;
+    }
+}
+</style>
+
 </head>
 
 <body>
 
-    <!-- BACKGROUND -->
-    <div class="background">
-        <div class="sun"></div>
-        <div class="fire"></div>
+<!-- ===== PETIR ===== -->
 
-        <div class="lightning l1"></div>
-        <div class="lightning l2"></div>
-        <div class="lightning l3"></div>
-    </div>
+<div class="lightning l1"></div>
+<div class="lightning l2"></div>
+<div class="lightning l3"></div>
 
-    <!-- NAVBAR -->
-    <nav>
-        <div class="logo">⚡ FANO</div>
+<!-- ===== KOIN JATUH ===== -->
 
-        <div>
-            <a href="#home">HOME</a>
-            <a href="#bio">BIO</a>
-            <a href="#power">POWER</a>
-        </div>
-    </nav>
+<div class="coin c1">🪙</div>
+<div class="coin c2">🪙</div>
+<div class="coin c3">🪙</div>
+<div class="coin c4">🪙</div>
+<div class="coin c5">🪙</div>
 
-    <!-- COINS -->
-    <div class="coin" style="left:5%; animation-duration:7s;">🪙</div>
-    <div class="coin" style="left:15%; animation-duration:5s; animation-delay:2s;">🪙</div>
-    <div class="coin" style="left:28%; animation-duration:8s; animation-delay:1s;">🪙</div>
-    <div class="coin" style="left:45%; animation-duration:6s; animation-delay:3s;">🪙</div>
-    <div class="coin" style="left:62%; animation-duration:9s;">🪙</div>
-    <div class="coin" style="left:78%; animation-duration:5s; animation-delay:2s;">🪙</div>
-    <div class="coin" style="left:90%; animation-duration:7s; animation-delay:1s;">🪙</div>
+<!-- ===== NAVBAR ===== -->
 
-    <!-- HERO -->
-    <section class="hero" id="home">
+<nav>
 
-        <div class="hero-content">
+```
+<div class="logo">
+    ⚡ FANO
+</div>
 
-            <div class="dragon">🐉</div>
+<div>
+    <a href="#home">HOME</a>
+    <a href="#bio">BIO</a>
+    <a href="#power">POWER</a>
+</div>
+```
 
-            <h1>FANO</h1>
+</nav>
 
-            <h2>Dragon of Thunder</h2>
+<!-- ===== HERO ===== -->
 
-            <p>
-                Di antara petir yang membelah langit dan kobaran api yang
-                membakar cakrawala, lahirlah seorang manusia bernama
-                <span class="highlight">Fano</span>.
-                Bukan raja. Bukan dewa.
-                Tapi seseorang yang sedang membangun legendanya sendiri.
-            </p>
+<section class="hero" id="home">
 
-            <a href="#bio" class="button">
-                ⚡ BUKA LEGENDA ⚡
-            </a>
+```
+<img
+    class="dragon-photo"
+    src="gambar/fano.jpg"
+    alt="Foto Fano"
+>
 
-        </div>
+<h1>FANO</h1>
 
-    </section>
+<div class="subtitle">
+    🐉 DRAGON OF THUNDER ⚡
+</div>
 
-    <!-- BIO -->
-    <section id="bio">
+<p class="description">
+    Bukan tentang seberapa keras petir menyambar,
+    tetapi tentang seberapa kuat seseorang tetap berdiri
+    setelah badai datang.
+</p>
 
-        <h2 class="title">📜 BIOGRAFI</h2>
+<a class="button" href="#bio">
+    ⚡ BUKA LEGENDA
+</a>
+```
 
-        <div class="profile">
+</section>
 
-            <h3>🔥 Fano — The Rising Dragon</h3>
+<!-- ===== BIO ===== -->
 
-            <p>
-                <span class="highlight">Fano</span> adalah seorang pelajar
-                yang sedang menempuh pendidikan di kelas
-                <span class="highlight">11 TKJ 4</span>.
-                Ia memiliki ketertarikan terhadap dunia teknologi,
-                komputer, jaringan, dan berbagai hal yang berhubungan
-                dengan dunia digital.
-            </p>
+<section id="bio">
 
-            <br>
+```
+<h2 class="section-title">
+    🔥 BIO FANO
+</h2>
 
-            <p>
-                Di luar dunia teknologi, Fano juga memiliki hobi
-                <span class="highlight">berlari</span>.
-                Baginya, setiap langkah bukan hanya tentang mencapai
-                garis akhir, tetapi tentang menjadi lebih kuat daripada
-                dirinya yang kemarin.
-            </p>
+<div class="bio-box">
 
-            <br>
+    <p>
+        <strong>Nama:</strong> Fano
+    </p>
 
-            <p>
-                Jika dunia adalah sebuah arena,
-                maka Fano tidak ingin hanya menjadi penonton.
-                Ia ingin masuk ke dalam arena,
-                menghadapi tantangan,
-                dan menciptakan jalannya sendiri.
-            </p>
+    <p>
+        <strong>Kelas:</strong> XI TKJ 4
+    </p>
 
-        </div>
+    <p>
+        <strong>Jurusan:</strong>
+        Teknik Komputer dan Jaringan
+    </p>
 
-        <div class="stats">
+    <p>
+        <strong>Hobi:</strong> Lari 🏃
+    </p>
 
-            <div class="stat">
-                <span>💻</span>
-                <h4>TKJ</h4>
-                <p>Computer & Network</p>
-            </div>
+    <br>
 
-            <div class="stat">
-                <span>🏃</span>
-                <h4>RUNNER</h4>
-                <p>Never Stop Moving</p>
-            </div>
+    <p>
+        Fano adalah seorang pelajar TKJ yang tertarik
+        dengan dunia teknologi, jaringan komputer,
+        website, dan berbagai hal yang berhubungan
+        dengan dunia digital.
+    </p>
 
-            <div class="stat">
-                <span>🐉</span>
-                <h4>DRAGON</h4>
-                <p>Power Within</p>
-            </div>
+    <br>
 
-        </div>
+    <p>
+        Seperti petir yang muncul setelah langit menjadi
+        gelap, proses menuju sesuatu yang besar tidak
+        selalu terlihat mudah.
+    </p>
 
-    </section>
+    <br>
 
-    <!-- POWER -->
-    <section id="power" class="power">
+    <p>
+        Yang penting adalah terus bergerak,
+        terus belajar, dan tidak berhenti ketika
+        menghadapi kesulitan.
+    </p>
 
-        <h2 class="title">⚡ THE POWER</h2>
+</div>
 
-        <div class="power-box">
+<!-- ===== STATS ===== -->
 
-            <div class="power-icon">⚡</div>
+<div class="stats">
 
-            <h3>THUNDER SOUL</h3>
+    <div class="card">
 
-            <p>
-                Petir tidak selalu datang untuk menghancurkan.
-                Terkadang ia datang untuk menerangi jalan.
-            </p>
-
-            <br>
-
-            <p>
-                Fano adalah perjalanan yang belum selesai.
-                Setiap tantangan adalah satu chapter,
-                setiap kegagalan adalah XP,
-                dan setiap keberhasilan adalah koin emas
-                yang dikumpulkan menuju level berikutnya.
-            </p>
-
+        <div class="icon">
+            💻
         </div>
 
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-
-        <h2>🐉 FANO — DRAGON OF THUNDER ⚡</h2>
+        <h3>TKJ</h3>
 
         <p>
-            "Legenda tidak ditemukan. Legenda dibuat."
+            Network & Technology
         </p>
 
-        <br>
+    </div>
 
-        <p>© 2026 Fano. All Rights Reserved.</p>
+    <div class="card">
 
-    </footer>
+        <div class="icon">
+            🏃
+        </div>
+
+        <h3>RUNNER</h3>
+
+        <p>
+            Keep Moving Forward
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icon">
+            🐉
+        </div>
+
+        <h3>DRAGON</h3>
+
+        <p>
+            Power Within
+        </p>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- ===== QUOTE ===== -->
+
+<div class="quote">
+
+```
+"Kekuatan bukan tentang tidak pernah jatuh,
+tetapi tentang selalu menemukan alasan untuk bangkit."
+
+<span>
+    — FANO
+</span>
+```
+
+</div>
+
+<!-- ===== POWER ===== -->
+
+<section id="power">
+
+```
+<h2 class="section-title">
+    ⚡ POWER
+</h2>
+
+<div class="power-box">
+
+    <div class="power-icon">
+        ⚡
+    </div>
+
+    <h2>
+        THUNDER SOUL
+    </h2>
+
+    <p>
+        Di dalam setiap badai terdapat energi.
+        Di dalam setiap kesulitan terdapat pelajaran.
+        Dan di dalam setiap langkah terdapat kesempatan
+        untuk menjadi lebih kuat.
+    </p>
+
+</div>
+```
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+```
+⚡ FANO | DRAGON OF THUNDER 🐉
+
+<br>
+
+XI TKJ 4 • 2026
+```
+
+</footer>
 
 </body>
 </html>
