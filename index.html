@@ -1,767 +1,376 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FANO | Dragon of Thunder</title>
+<title>KING_ZELETOT | Suntik Sosmed</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+:root {
+ --blue:#087bff; --cyan:#00eaff; --gold:#ffc629;
+ --dark:#020817; --panel:#0a2045;
 }
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    min-height: 100vh;
-    overflow-x: hidden;
-    background:
-        radial-gradient(circle at 50% 15%, #ffcf33 0%, #ff6a00 18%, #a51c00 42%, #180000 78%, #050000 100%);
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ background:radial-gradient(ellipse at top,#073b91,transparent 55%),
+ linear-gradient(145deg,#020612,#061b40,#020612);
+ color:white;font-family:Poppins,sans-serif;
 }
-
-/* ===== BACKGROUND ===== */
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.15), transparent 15%),
-        radial-gradient(circle at 80% 25%, rgba(255,190,0,.15), transparent 20%),
-        radial-gradient(circle at 50% 80%, rgba(255,50,0,.20), transparent 30%);
-    pointer-events: none;
-    z-index: -5;
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;
+ background-image:radial-gradient(#168cff 1px,transparent 1px);
+ background-size:28px 28px;opacity:.13;z-index:-1;
 }
-
-/* ===== PETIR ===== */
-
-.lightning {
-    position: fixed;
-    width: 4px;
-    height: 220px;
-    background: #fff;
-    box-shadow:
-        0 0 10px #fff,
-        0 0 25px #00b7ff,
-        0 0 50px #008cff;
-    opacity: 0;
-    z-index: -1;
-    animation: flash 4s infinite;
+.container{width:92%;max-width:1150px;margin:auto}
+header{
+ padding:18px 0;background:#020817ed;
+ border-bottom:1px solid #087bff55;
+ position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);
 }
-
-.l1 {
-    top: 5%;
-    left: 15%;
-    transform: rotate(25deg);
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font-family:Orbitron;font-weight:900;color:var(--gold);font-size:19px}
+nav a{color:white;text-decoration:none;font-size:12px;margin-left:12px}
+nav a:hover{color:var(--cyan)}
+.hero{text-align:center;padding:65px 15px 50px}
+.crown{font-size:70px;animation:float 3s infinite}
+@keyframes float{50%{transform:translateY(-12px)}}
+.hero h1{
+ font-family:Orbitron;font-size:clamp(30px,7vw,65px);
+ text-shadow:0 0 15px var(--blue),0 0 35px var(--cyan);margin:15px 0;
 }
-
-.l2 {
-    top: 25%;
-    right: 13%;
-    transform: rotate(-30deg);
-    animation-delay: 1.5s;
-}
-
-.l3 {
-    bottom: 8%;
-    left: 45%;
-    transform: rotate(15deg);
-    animation-delay: 3s;
-}
-
-@keyframes flash {
-    0%, 88%, 100% {
-        opacity: 0;
-    }
-
-    90% {
-        opacity: 1;
-    }
-
-    92% {
-        opacity: .15;
-    }
-
-    94% {
-        opacity: 1;
-    }
-
-    96% {
-        opacity: 0;
-    }
-}
-
-/* ===== NAVBAR ===== */
-
-nav {
-    position: fixed;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(92%, 900px);
-    padding: 15px 24px;
-    border-radius: 50px;
-    background: rgba(15, 3, 0, .72);
-    border: 1px solid rgba(255,190,0,.5);
-    backdrop-filter: blur(14px);
-    box-shadow:
-        0 0 20px rgba(255,100,0,.3),
-        inset 0 0 20px rgba(255,180,0,.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
-
-.logo {
-    font-size: 21px;
-    font-weight: 900;
-    color: #ffd000;
-    text-shadow:
-        0 0 10px #ff8c00,
-        0 0 25px #ff3c00;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    margin-left: 20px;
-    transition: .3s;
-}
-
-nav a:hover {
-    color: #ffd000;
-    text-shadow:
-        0 0 10px #ff7b00,
-        0 0 20px #ff3c00;
-}
-
-/* ===== HERO ===== */
-
-.hero {
-    min-height: 100vh;
-    padding: 130px 20px 70px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-/* ===== FOTO FANO ===== */
-
-.dragon-photo {
-    width: 230px;
-    height: 230px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 5px solid #ffd000;
-
-    box-shadow:
-        0 0 12px #fff,
-        0 0 30px #ffd000,
-        0 0 60px #ff7200,
-        0 0 110px #ff2600;
-
-    animation: dragonFloat 3s ease-in-out infinite;
-    margin-bottom: 25px;
-}
-
-@keyframes dragonFloat {
-    0%, 100% {
-        transform: translateY(0) scale(1);
-    }
-
-    50% {
-        transform: translateY(-15px) scale(1.04);
-    }
-}
-
-/* ===== TITLE ===== */
-
-.hero h1 {
-    font-size: clamp(65px, 14vw, 155px);
-    font-weight: 1000;
-    letter-spacing: 10px;
-    color: #fff;
-
-    text-shadow:
-        0 0 10px #fff,
-        0 0 25px #ffd000,
-        0 0 50px #ff6500,
-        0 0 100px #ff2600;
-}
-
-.subtitle {
-    margin-top: 8px;
-    font-size: clamp(20px, 4vw, 38px);
-    font-weight: bold;
-    color: #ffd000;
-
-    text-shadow:
-        0 0 10px #ff9d00,
-        0 0 25px #ff4500;
-}
-
-.description {
-    max-width: 700px;
-    margin-top: 20px;
-    line-height: 1.8;
-    color: #ffe9c0;
-    font-size: 17px;
-}
-
-/* ===== BUTTON ===== */
-
-.button {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 32px;
-    border-radius: 50px;
-
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-
-    background: linear-gradient(
-        90deg,
-        #ff2600,
-        #ff7200,
-        #ffc400
-    );
-
-    box-shadow:
-        0 0 15px #ff6500,
-        0 0 40px rgba(255,80,0,.6);
-
-    transition: .3s;
-}
-
-.button:hover {
-    transform: scale(1.08);
-
-    box-shadow:
-        0 0 20px #fff,
-        0 0 50px #ff6500,
-        0 0 90px #ff2600;
-}
-
-/* ===== SECTION ===== */
-
-section {
-    width: min(1000px, 90%);
-    margin: auto;
-    padding: 100px 0;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 45px;
-    color: #ffd000;
-
-    text-shadow:
-        0 0 15px #ff6500,
-        0 0 35px #ff2600;
-
-    margin-bottom: 40px;
-}
-
-/* ===== BIO ===== */
-
-.bio-box {
-    padding: 35px;
-    border-radius: 25px;
-
-    background: rgba(20, 5, 0, .68);
-
-    border: 1px solid rgba(255,190,0,.4);
-
-    box-shadow:
-        0 0 35px rgba(255,80,0,.25),
-        inset 0 0 25px rgba(255,120,0,.05);
-
-    backdrop-filter: blur(10px);
-
-    line-height: 1.9;
-}
-
-.bio-box strong {
-    color: #ffd000;
-}
-
-/* ===== STATS ===== */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.card {
-    padding: 30px 20px;
-    text-align: center;
-
-    border-radius: 20px;
-
-    background: rgba(20,5,0,.72);
-
-    border: 1px solid rgba(255,190,0,.4);
-
-    box-shadow:
-        0 0 25px rgba(255,90,0,.2);
-
-    transition: .3s;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-
-    box-shadow:
-        0 0 20px #ffd000,
-        0 0 50px rgba(255,80,0,.5);
-}
-
-.card .icon {
-    font-size: 45px;
-    margin-bottom: 10px;
-}
-
-.card h3 {
-    color: #ffd000;
-    margin-bottom: 8px;
-}
-
-/* ===== QUOTE ===== */
-
-.quote {
-    width: min(750px, 90%);
-    margin: 40px auto 80px;
-
-    text-align: center;
-
-    font-size: 24px;
-    font-style: italic;
-
-    color: #ffe8a0;
-
-    text-shadow:
-        0 0 10px #ff6500;
-}
-
-.quote span {
-    display: block;
-    margin-top: 15px;
-
-    font-size: 15px;
-    font-style: normal;
-
-    color: #ffd000;
-}
-
-/* ===== POWER ===== */
-
-.power-box {
-    padding: 50px 25px;
-
-    text-align: center;
-
-    border-radius: 30px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,150,255,.25),
-            rgba(10,0,0,.85)
-        );
-
-    border: 2px solid rgba(0,170,255,.6);
-
-    box-shadow:
-        0 0 20px #008cff,
-        0 0 60px rgba(0,120,255,.25),
-        inset 0 0 40px rgba(0,130,255,.15);
-}
-
-.power-icon {
-    font-size: 80px;
-
-    animation: thunder 1.5s infinite;
-}
-
-@keyframes thunder {
-    0%, 100% {
-        filter: drop-shadow(0 0 5px #fff);
-    }
-
-    50% {
-        filter:
-            drop-shadow(0 0 20px #00aaff)
-            drop-shadow(0 0 50px #008cff);
-    }
-}
-
-.power-box h2 {
-    margin: 15px 0;
-
-    font-size: 35px;
-
-    color: #5fcaff;
-
-    text-shadow:
-        0 0 15px #008cff,
-        0 0 35px #005eff;
-}
-
-.power-box p {
-    color: #d8f4ff;
-    line-height: 1.8;
-}
-
-/* ===== COINS ===== */
-
-.coin {
-    position: fixed;
-    top: -60px;
-
-    font-size: 25px;
-
-    pointer-events: none;
-
-    z-index: 5;
-
-    animation: fall linear infinite;
-}
-
-.c1 {
-    left: 8%;
-    animation-duration: 7s;
-}
-
-.c2 {
-    left: 25%;
-    animation-duration: 10s;
-    animation-delay: 2s;
-}
-
-.c3 {
-    left: 50%;
-    animation-duration: 8s;
-    animation-delay: 1s;
-}
-
-.c4 {
-    left: 72%;
-    animation-duration: 11s;
-    animation-delay: 3s;
-}
-
-.c5 {
-    left: 90%;
-    animation-duration: 9s;
-    animation-delay: 4s;
-}
-
-@keyframes fall {
-    from {
-        transform: translateY(-60px) rotate(0deg);
-    }
-
-    to {
-        transform: translateY(110vh) rotate(720deg);
-    }
-}
-
-/* ===== FOOTER ===== */
-
-footer {
-    padding: 40px 20px;
-
-    text-align: center;
-
-    color: #ffc46b;
-
-    border-top:
-        1px solid rgba(255,180,0,.25);
-}
-
-/* ===== MOBILE ===== */
-
-@media (max-width: 700px) {
-
-    nav {
-        padding: 12px 15px;
-    }
-
-    nav a {
-        margin-left: 7px;
-        font-size: 11px;
-    }
-
-    .dragon-photo {
-        width: 180px;
-        height: 180px;
-    }
-
-    .hero h1 {
-        letter-spacing: 5px;
-    }
-
-    .description {
-        font-size: 15px;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-    }
-
-    .section-title {
-        font-size: 35px;
-    }
-
-    .quote {
-        font-size: 20px;
-    }
+.hero h2{color:var(--gold);font-size:clamp(20px,4vw,34px)}
+.hero p{color:#c5ddff;margin:12px 0 20px}
+.tagline{display:inline-block;padding:10px 22px;border:1px solid var(--cyan);border-radius:30px;color:var(--cyan)}
+.btn{display:inline-block;padding:13px 24px;border-radius:12px;text-decoration:none;font-weight:800}
+.btn-main{background:linear-gradient(90deg,#087bff,#00d9ff);color:white}
+.btn-green{background:linear-gradient(90deg,#00bd64,#00ed91);color:white}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:55px}
+.info-box{background:var(--panel);border:1px solid var(--blue);border-radius:15px;padding:20px 10px;text-align:center}
+.info-box strong{display:block;color:var(--cyan);font-size:15px}
+.info-box span{font-size:11px;color:#c5ddff}
+.section-title{text-align:center;font-family:Orbitron;color:var(--gold);margin:35px 0;font-size:clamp(21px,4vw,30px)}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:55px}
+.card{background:linear-gradient(145deg,#102b56,#06132c);border:1px solid var(--blue);border-radius:18px;padding:22px 17px;transition:.3s}
+.card:hover{transform:translateY(-5px);border-color:var(--cyan);box-shadow:0 0 20px #00dfff44}
+.card h3{font-family:Orbitron;color:var(--cyan);font-size:16px;margin-bottom:18px}
+.group{margin-bottom:18px}
+.group h4{color:var(--gold);font-size:12px;border-bottom:1px solid #ffffff33;padding-bottom:7px;margin-bottom:8px}
+.price{display:flex;justify-content:space-between;gap:5px;font-size:11px;padding:5px 0;color:#d6e8ff}
+.price b{color:var(--cyan);white-space:nowrap}
+.order-section{background:linear-gradient(145deg,#102b56,#06132c);border:1px solid var(--cyan);border-radius:20px;padding:28px;max-width:750px;margin:55px auto;box-shadow:0 0 25px #087bff44}
+.order-section h2{text-align:center;color:var(--gold);font-family:Orbitron}
+.subtitle{text-align:center;color:#b9d9ff;font-size:12px;margin:12px 0 25px}
+.order-section label{display:block;color:var(--cyan);font-weight:700;font-size:13px;margin:16px 0 7px}
+.order-section select,.order-section input{width:100%;padding:13px;background:#020c20;border:1px solid var(--blue);color:white;border-radius:10px;font-family:Poppins;outline:none}
+.order-section select:focus,.order-section input:focus{border-color:var(--cyan)}
+.summary{background:#020c20;border:1px dashed var(--gold);border-radius:12px;padding:18px;margin-top:22px;line-height:2;font-size:13px}
+.summary h3{color:var(--gold);margin-bottom:8px}
+.total{font-size:25px;font-weight:900;color:var(--cyan)}
+.submit{width:100%;padding:15px;margin-top:20px;border:0;border-radius:12px;background:linear-gradient(90deg,#00bd64,#00ed91);color:white;font-weight:900;font-size:14px;cursor:pointer}
+.submit:hover{box-shadow:0 0 20px #00e676}
+.payment{text-align:center;background:linear-gradient(135deg,#102c59,#06132c);border:1px solid var(--gold);padding:30px;border-radius:20px;margin:35px 0}
+.payment h2{font-family:Orbitron;color:var(--gold);margin-bottom:18px}
+.payment-list{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.payment-list span{background:white;color:#07152d;padding:10px 20px;border-radius:10px;font-weight:800}
+.contact{text-align:center;padding:35px 15px;margin:35px 0;border:1px solid var(--cyan);border-radius:20px;background:linear-gradient(120deg,#062451,#0a1640)}
+.contact h2{color:var(--gold);font-family:Orbitron}
+.phone{font-size:clamp(24px,5vw,36px);font-weight:900;color:var(--cyan);margin:15px}
+.note{font-size:10px;color:#a9c5e6;margin-top:20px;line-height:1.7}
+.links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.links a{color:var(--cyan);text-decoration:none;font-size:13px}
+.floating-wa{position:fixed;right:18px;bottom:18px;z-index:999;background:linear-gradient(135deg,#00e676,#00a854);color:white;padding:14px 18px;border-radius:50px;text-decoration:none;font-weight:800;font-size:12px;box-shadow:0 0 20px #00e67699}
+footer{text-align:center;padding:25px;background:#020612;color:#9db9db;font-size:12px}
+footer strong{color:var(--gold)}
+@media(max-width:850px){.services{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){
+ .services,.info{grid-template-columns:1fr}
+ .logo{font-size:13px}
+ nav a{font-size:10px;margin-left:6px}
+ .hero{padding-top:45px}
+ .order-section{padding:20px 15px}
+ .floating-wa{right:10px;bottom:10px;font-size:11px}
 }
 </style>
-
 </head>
 
 <body>
+<header>
+ <div class="container nav">
+  <div class="logo">👑 KING_ZELETOT</div>
+  <nav>
+   <a href="#layanan">Harga</a>
+   <a href="#pesan">Pesan</a>
+   <a href="#payment">Payment</a>
+  </nav>
+ </div>
+</header>
 
-<!-- ===== PETIR ===== -->
-
-<div class="lightning l1"></div>
-<div class="lightning l2"></div>
-<div class="lightning l3"></div>
-
-<!-- ===== KOIN JATUH ===== -->
-
-<div class="coin c1">🪙</div>
-<div class="coin c2">🪙</div>
-<div class="coin c3">🪙</div>
-<div class="coin c4">🪙</div>
-<div class="coin c5">🪙</div>
-
-<!-- ===== NAVBAR ===== -->
-
-<nav>
-
-```
-<div class="logo">
-    ⚡ FANO
-</div>
-
-<div>
-    <a href="#home">HOME</a>
-    <a href="#bio">BIO</a>
-    <a href="#power">POWER</a>
-</div>
-```
-
-</nav>
-
-<!-- ===== HERO ===== -->
-
-<section class="hero" id="home">
-
-```
-<img
-    class="dragon-photo"
-    src="gambar/fano.jpg"
-    alt="Foto Fano"
->
-
-<h1>FANO</h1>
-
-<div class="subtitle">
-    🐉 DRAGON OF THUNDER ⚡
-</div>
-
-<p class="description">
-    Bukan tentang seberapa keras petir menyambar,
-    tetapi tentang seberapa kuat seseorang tetap berdiri
-    setelah badai datang.
-</p>
-
-<a class="button" href="#bio">
-    ⚡ BUKA LEGENDA
-</a>
-```
-
+<section class="hero">
+ <div class="crown">👑</div>
+ <h1>KING_ZELETOT</h1>
+ <h2>SUNTIK SOSMED</h2>
+ <p>TERMURAH • TERCEPAT • TERLENGKAP</p>
+ <div class="tagline">⚡ Estimasi proses 15–60 Menit</div>
+ <p>💻 Bisa beli WEB SERVER / APK juga!</p>
+ <a class="btn btn-main" href="#layanan">LIHAT DAFTAR HARGA</a>
 </section>
 
-<!-- ===== BIO ===== -->
+<div class="container">
+ <div class="info">
+  <div class="info-box"><strong>⚡ 15–60 MENIT</strong><span>Estimasi proses</span></div>
+  <div class="info-box"><strong>💎 HARGA TERJANGKAU</strong><span>Banyak pilihan paket</span></div>
+  <div class="info-box"><strong>🕒 05.00–21.00</strong><span>Jam operasional WIB</span></div>
+ </div>
 
-<section id="bio">
+ <section id="layanan">
+  <h2 class="section-title">🔥 DAFTAR HARGA</h2>
+  <div class="services">
 
-```
-<h2 class="section-title">
-    🔥 BIO FANO
-</h2>
+   <div class="card">
+    <h3>🎵 TIKTOK SERVICES</h3>
+    <div class="group"><h4>❤️ LIKE PERMANEN</h4>
+     <div class="price"><span>300 Like</span><b>Rp3.900</b></div>
+     <div class="price"><span>500 Like</span><b>Rp5.900</b></div>
+     <div class="price"><span>1.000 Like</span><b>Rp9.900</b></div>
+     <div class="price"><span>2.000 Like</span><b>Rp17.900</b></div>
+     <div class="price"><span>5.000 Like</span><b>Rp44.900</b></div>
+    </div>
+    <div class="group"><h4>👥 FOLLOWERS MIX</h4>
+     <div class="price"><span>100 Followers</span><b>Rp5.900</b></div>
+     <div class="price"><span>300 Followers</span><b>Rp10.900</b></div>
+     <div class="price"><span>500 Followers</span><b>Rp15.900</b></div>
+     <div class="price"><span>1.000 Followers</span><b>Rp23.900</b></div>
+    </div>
+    <div class="group"><h4>🇮🇩 FOLLOWERS FULL INDO</h4>
+     <div class="price"><span>100 Followers</span><b>Rp10.900</b></div>
+     <div class="price"><span>500 Followers</span><b>Rp20.900</b></div>
+     <div class="price"><span>1.000 Followers</span><b>Rp29.900</b></div>
+    </div>
+    <div class="group"><h4>▶️ VIEWS</h4>
+     <div class="price"><span>1.000 Views</span><b>Rp1.900</b></div>
+     <div class="price"><span>5.000 Views</span><b>Rp7.900</b></div>
+     <div class="price"><span>10.000 Views</span><b>Rp11.900</b></div>
+    </div>
+   </div>
 
-<div class="bio-box">
+   <div class="card">
+    <h3>📸 INSTAGRAM SERVICES</h3>
+    <div class="group"><h4>❤️ LIKE</h4>
+     <div class="price"><span>500 Like</span><b>Rp2.900</b></div>
+     <div class="price"><span>1.000 Like</span><b>Rp7.900</b></div>
+     <div class="price"><span>2.000 Like</span><b>Rp11.900</b></div>
+    </div>
+    <div class="group"><h4>👥 FOLLOWERS MIX</h4>
+     <div class="price"><span>100 Followers</span><b>Rp5.900</b></div>
+     <div class="price"><span>500 Followers</span><b>Rp15.900</b></div>
+     <div class="price"><span>1.000 Followers</span><b>Rp23.900</b></div>
+    </div>
+    <div class="group"><h4>🇮🇩 FOLLOWERS FULL INDO</h4>
+     <div class="price"><span>100 Followers</span><b>Rp12.900</b></div>
+     <div class="price"><span>500 Followers</span><b>Rp25.900</b></div>
+     <div class="price"><span>1.000 Followers</span><b>Rp45.900</b></div>
+    </div>
+    <div class="group"><h4>▶️ VIEWS</h4>
+     <div class="price"><span>2.000 Views</span><b>Rp3.900</b></div>
+     <div class="price"><span>5.000 Views</span><b>Rp7.900</b></div>
+     <div class="price"><span>10.000 Views</span><b>Rp11.900</b></div>
+    </div>
+   </div>
 
-    <p>
-        <strong>Nama:</strong> Fano
-    </p>
+   <div class="card">
+    <h3>▶️ YOUTUBE SERVICES</h3>
+    <div class="group"><h4>👀 VIEWS</h4>
+     <div class="price"><span>500 Views</span><b>Rp4.900</b></div>
+     <div class="price"><span>1.000 Views</span><b>Rp7.900</b></div>
+     <div class="price"><span>5.000 Views</span><b>Rp24.900</b></div>
+    </div>
+    <div class="group"><h4>🔔 SUBSCRIBERS (HARGA TETAP)</h4>
+     <div class="price"><span>100 Subscribers</span><b>Rp9.900</b></div>
+     <div class="price"><span>500 Subscribers</span><b>Rp34.900</b></div>
+     <div class="price"><span>1.000 Subscribers</span><b>Rp59.900</b></div>
+    </div>
+    <div class="group"><h4>👍 LIKE</h4>
+     <div class="price"><span>100 Like</span><b>Rp4.900</b></div>
+     <div class="price"><span>500 Like</span><b>Rp14.900</b></div>
+     <div class="price"><span>1.000 Like</span><b>Rp24.900</b></div>
+    </div>
+   </div>
 
-    <p>
-        <strong>Kelas:</strong> XI TKJ 4
-    </p>
+   <div class="card">
+    <h3>💻 WEB SERVER / APK</h3>
+    <div class="group">
+     <h4>🌐 JASA WEB SERVER</h4>
+     <div class="price"><span>Web Server</span><b>Rp35.000</b></div>
+    </div>
+    <p style="font-size:12px;color:#c5ddff">Hubungi admin untuk informasi dan pemesanan layanan web server atau APK.</p>
+    <a class="btn btn-main" style="display:block;text-align:center;margin-top:18px" href="https://wa.me/628979864997?text=Halo%20King_Zeletot%2C%20saya%20mau%20bertanya%20tentang%20Web%20Server%20atau%20APK." target="_blank">TANYA ADMIN</a>
+   </div>
 
-    <p>
-        <strong>Jurusan:</strong>
-        Teknik Komputer dan Jaringan
-    </p>
+  </div>
+ </section>
 
-    <p>
-        <strong>Hobi:</strong> Lari 🏃
-    </p>
+ <section id="pesan">
+  <div class="order-section">
+   <h2>👑 PILIH PESANAN</h2>
+   <p class="subtitle">Pilih platform, layanan, dan paket yang kamu inginkan!</p>
 
-    <br>
+   <label>📱 PLATFORM</label>
+   <select id="platform">
+    <option value="TikTok">TikTok</option>
+    <option value="Instagram">Instagram</option>
+    <option value="YouTube">YouTube</option>
+   </select>
 
-    <p>
-        Fano adalah seorang pelajar TKJ yang tertarik
-        dengan dunia teknologi, jaringan komputer,
-        website, dan berbagai hal yang berhubungan
-        dengan dunia digital.
-    </p>
+   <label>🔥 JENIS LAYANAN</label>
+   <select id="service"></select>
 
-    <br>
+   <label>📦 PILIH PAKET</label>
+   <select id="package"></select>
 
-    <p>
-        Seperti petir yang muncul setelah langit menjadi
-        gelap, proses menuju sesuatu yang besar tidak
-        selalu terlihat mudah.
-    </p>
+   <label>🔗 LINK AKUN / POSTINGAN</label>
+   <input type="url" id="link" placeholder="https://...">
 
-    <br>
+   <div class="summary">
+    <h3>🧾 RINGKASAN PESANAN</h3>
+    <div>Platform: <b id="sumPlatform">TikTok</b></div>
+    <div>Layanan: <b id="sumService">-</b></div>
+    <div>Paket: <b id="sumPackage">-</b></div>
+    <div>Total harga:</div>
+    <div class="total" id="sumPrice">Rp0</div>
+   </div>
 
-    <p>
-        Yang penting adalah terus bergerak,
-        terus belajar, dan tidak berhenti ketika
-        menghadapi kesulitan.
-    </p>
+   <button class="submit" onclick="orderWhatsApp()">💬 PESAN SEKARANG VIA WHATSAPP</button>
+  </div>
+ </section>
 
+ <section id="payment" class="payment">
+  <h2>💳 PAYMENT METHODS</h2>
+  <div class="payment-list">
+   <span>💙 DANA</span><span>🟢 GOPAY</span>
+   <span>🟣 OVO</span><span>▦ QRIS</span>
+  </div>
+  <p style="margin-top:15px;color:#c5ddff">ALL PAYMENT AVAILABLE</p>
+ </section>
+
+ <section class="contact">
+  <h2>👑 ORDER SEKARANG!</h2>
+  <p style="margin-top:12px">Hubungi admin King_Zeletot</p>
+  <div class="phone">08979864997</div>
+  <a class="btn btn-green" href="https://wa.me/628979864997" target="_blank">💬 CHAT WHATSAPP</a>
+  <div class="links">
+   <a href="https://whatsapp.com/channel/0029VbEYhAtKgsNoSONqy331" target="_blank">📢 WhatsApp Channel</a>
+   <a href="http://kiwfn.my.id/" target="_blank">🌐 Website</a>
+  </div>
+  <p style="margin-top:18px;color:#b9d9ff">🕒 05.00–21.00 WIB</p>
+ </section>
+
+ <div style="text-align:center;margin:35px 0">
+  <h3 style="color:gold">YOUR SOCIAL MEDIA, YOUR CROWN! 👑</h3>
+  <p style="font-size:12px;margin-top:10px;color:#c5ddff">Terima kasih telah mengunjungi KING_ZELETOT.</p>
+  <p class="note">Ketersediaan, kualitas, dan estimasi hasil mengikuti ketentuan masing-masing platform. Layanan engagement buatan dapat berisiko melanggar kebijakan platform.</p>
+ </div>
 </div>
 
-<!-- ===== STATS ===== -->
-
-<div class="stats">
-
-    <div class="card">
-
-        <div class="icon">
-            💻
-        </div>
-
-        <h3>TKJ</h3>
-
-        <p>
-            Network & Technology
-        </p>
-
-    </div>
-
-    <div class="card">
-
-        <div class="icon">
-            🏃
-        </div>
-
-        <h3>RUNNER</h3>
-
-        <p>
-            Keep Moving Forward
-        </p>
-
-    </div>
-
-    <div class="card">
-
-        <div class="icon">
-            🐉
-        </div>
-
-        <h3>DRAGON</h3>
-
-        <p>
-            Power Within
-        </p>
-
-    </div>
-
-</div>
-```
-
-</section>
-
-<!-- ===== QUOTE ===== -->
-
-<div class="quote">
-
-```
-"Kekuatan bukan tentang tidak pernah jatuh,
-tetapi tentang selalu menemukan alasan untuk bangkit."
-
-<span>
-    — FANO
-</span>
-```
-
-</div>
-
-<!-- ===== POWER ===== -->
-
-<section id="power">
-
-```
-<h2 class="section-title">
-    ⚡ POWER
-</h2>
-
-<div class="power-box">
-
-    <div class="power-icon">
-        ⚡
-    </div>
-
-    <h2>
-        THUNDER SOUL
-    </h2>
-
-    <p>
-        Di dalam setiap badai terdapat energi.
-        Di dalam setiap kesulitan terdapat pelajaran.
-        Dan di dalam setiap langkah terdapat kesempatan
-        untuk menjadi lebih kuat.
-    </p>
-
-</div>
-```
-
-</section>
-
-<!-- ===== FOOTER ===== -->
+<a class="floating-wa" href="https://wa.me/628979864997?text=Halo%20King_Zeletot%2C%20saya%20mau%20bertanya." target="_blank">💬 ORDER: 08979864997</a>
 
 <footer>
-
-```
-⚡ FANO | DRAGON OF THUNDER 🐉
-
-<br>
-
-XI TKJ 4 • 2026
-```
-
+ © 2026 <strong>KING_ZELETOT</strong> • All Rights Reserved
+ <br><br>YOUR SOCIAL MEDIA, YOUR CROWN 👑
 </footer>
 
+<script>
+const catalog = {
+ TikTok: {
+  "Like Permanen":[["300 Like",3900],["500 Like",5900],["1.000 Like",9900],["2.000 Like",17900],["5.000 Like",44900]],
+  "Followers Mix":[["100 Followers",5900],["300 Followers",10900],["500 Followers",15900],["1.000 Followers",23900]],
+  "Followers Full Indo":[["100 Followers",10900],["500 Followers",20900],["1.000 Followers",29900]],
+  "Views":[["1.000 Views",1900],["5.000 Views",7900],["10.000 Views",11900]]
+ },
+ Instagram: {
+  "Like":[["500 Like",2900],["1.000 Like",7900],["2.000 Like",11900]],
+  "Followers Mix":[["100 Followers",5900],["500 Followers",15900],["1.000 Followers",23900]],
+  "Followers Full Indo":[["100 Followers",12900],["500 Followers",25900],["1.000 Followers",45900]],
+  "Views":[["2.000 Views",3900],["5.000 Views",7900],["10.000 Views",11900]]
+ },
+ YouTube: {
+  "Views":[["500 Views",4900],["1.000 Views",7900],["5.000 Views",24900]],
+  "Subscribers":[["100 Subscribers",9900],["500 Subscribers",34900],["1.000 Subscribers",59900]],
+  "Like":[["100 Like",4900],["500 Like",14900],["1.000 Like",24900]]
+ }
+};
+
+const platform=document.getElementById("platform");
+const service=document.getElementById("service");
+const pack=document.getElementById("package");
+
+function rupiah(n){return "Rp"+n.toLocaleString("id-ID")}
+
+function updateServices(){
+ service.innerHTML="";
+ Object.keys(catalog[platform.value]).forEach(name=>{
+  service.add(new Option(name,name));
+ });
+ updatePackages();
+}
+
+function updatePackages(){
+ pack.innerHTML="";
+ catalog[platform.value][service.value].forEach((item,index)=>{
+  pack.add(new Option(item[0]+" - "+rupiah(item[1]),index));
+ });
+ updateSummary();
+}
+
+function updateSummary(){
+ const selected=catalog[platform.value][service.value][pack.value];
+ if(!selected)return;
+ document.getElementById("sumPlatform").textContent=platform.value;
+ document.getElementById("sumService").textContent=service.value;
+ document.getElementById("sumPackage").textContent=selected[0];
+ document.getElementById("sumPrice").textContent=rupiah(selected[1]);
+}
+
+platform.addEventListener("change",updateServices);
+service.addEventListener("change",updatePackages);
+pack.addEventListener("change",updateSummary);
+
+function orderWhatsApp(){
+ const selected=catalog[platform.value][service.value][pack.value];
+ const link=document.getElementById("link").value.trim();
+
+ if(!link){
+  alert("Masukkan link akun atau postingan terlebih dahulu!");
+  document.getElementById("link").focus();
+  return;
+ }
+
+ try{
+  const parsed=new URL(link);
+  if(!["http:","https:"].includes(parsed.protocol))throw Error();
+ }catch(e){
+  alert("Link tidak valid. Gunakan link yang diawali https://");
+  return;
+ }
+
+ const message=`Halo King_Zeletot, saya mau pesan:
+
+Platform: ${platform.value}
+Layanan: ${service.value}
+Paket: ${selected[0]}
+Harga: ${rupiah(selected[1])}
+Link: ${link}
+
+Mohon diproses, terima kasih!
+
+Order dari Website KING_ZELETOT 👑`;
+
+ window.open("https://wa.me/628979864997?text="+encodeURIComponent(message),"_blank");
+}
+
+updateServices();
+</script>
 </body>
 </html>
